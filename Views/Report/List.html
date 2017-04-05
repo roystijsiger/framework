@@ -1,0 +1,44 @@
+{% extends template %}
+
+{% block pagename %}Rapportages{% endblock %}
+{% block pagedescription %}Alle Rapportages{% endblock %}
+
+
+{% block content %}
+<div>
+    <table class="table table-striped table-bordered">
+            <thead>
+                    <tr>
+                            <th class="center">#</th>
+                            <th class="hidden-xs">Domein</th>
+                            <th class="hidden-480">Rapportage</th>
+                            <th class="hidden-480">Datum</th>
+                    </tr>
+            </thead>
+
+            <tbody>
+                {% for report in data.reports %} 
+                <tr>
+                    <td class="center"> {{report.id}}</td>
+                    <td width="20%">
+                        {{data.domains[report.domain].name}}
+                    </td>
+                    <td class="hidden-480">
+                        {{report.report[:401]|raw}}...
+                    </td>
+                    <td class="hidden-480" width="15%">{{report.report_date|date("d-m-Y")}}</td>
+                     <td class="" width="10%">
+                         <p><a class="btn-sm btn-success" href="/reports/view?id={{report.id}}">
+                             <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                             Bekijk
+                         </a></p>
+                         <a class="btn-sm btn-info" href="/reports/edit?id={{report.id}}">
+                             <i class="glyphicon glyphicon-edit icon-white"></i>
+                             Bewerken
+                         </a>&nbsp;
+                </tr>
+                 {% endfor %}
+            </tbody>
+    </table>
+</div>
+{% endblock %}

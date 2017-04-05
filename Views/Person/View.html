@@ -1,0 +1,809 @@
+
+{% block pagename %}{{data.person.claims[18].value}} {{data.person.claims[32].value}}{% endblock %}
+{% block pagedescription %}Bekijk alle info van {{data.person.claims[18].value}} {{data.person.claims[32].value}}{% endblock %}
+{% extends template %}
+
+{% block additionalHead %}
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<!-- elFinder CSS (REQUIRED) -->
+<link rel="stylesheet" type="text/css" href="/Libraries/elfinder/css/elfinder.min.css">
+<link rel="stylesheet" type="text/css" href="/Libraries/elfinder/themes/windows-10/css/theme.css">
+
+<!-- elFinder JS (REQUIRED) -->
+<script src="/Libraries/elfinder/js/elfinder.min.js"></script>
+
+<!-- elFinder translation (OPTIONAL) -->
+<script src="/Libraries/elfinder/js/i18n/elfinder.nl.js"></script>
+
+<!-- elFinder initialization (REQUIRED) -->
+<script type="text/javascript" charset="utf-8">
+    // Documentation for client options:
+    // https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
+    $(document).ready(function () {
+        $('#elfinder').elfinder({
+//            url: '/Libraries/elfinder/php/connector.minimal.php', //,  // connector URL (REQUIRED)
+            url: '/persons/files?id={{data.person.id}}', //,  // connector URL (REQUIRED)
+            lang: 'nl'                    // language (OPTIONAL)
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+    {% set person = data.person %}
+ <div id="user-profile-2" class="user-profile">
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-18">
+            <li class="active">
+                <a data-toggle="tab" -href="#home" aria-expanded="true">
+                    <i class="green ace-icon fa fa-user bigger-120"></i>
+                    Profiel
+                </a>
+            </li>
+
+            <li class="">
+                <a data-toggle="tab" href="#files" aria-expanded="false">
+                    <i class="orange ace-icon fa fa-files-o bigger-120"></i>
+                    Bestanden
+                </a>
+            </li>
+
+            <li class="">
+                <a data-toggle="tab" -href="#friends" aria-expanded="false">
+                    <i class="blue ace-icon fa fa-users bigger-120"></i>
+                    Gekoppelde verzorgers
+                </a>
+            </li>
+
+            <li class="">
+                <a data-toggle="tab" -href="#pictures" aria-expanded="false">
+                    <i class="pink ace-icon fa fa-files-o bigger-120"></i>
+                    Dossiers
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content no-border padding-24">
+            <div id="home" class="tab-pane active">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 center">
+                        <span class="profile-picture">
+                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="/Views/Templates/Ace/avatars/profile-pic.jpg">
+                        </span>
+
+                        <div class="space space-4"></div>
+
+                        <a href="/persons/edit?id={{person.id}}" class="btn btn-sm btn-block btn-warning">
+                            <i class="ace-icon glyphicon glyphicon-edit bigger-120"></i>
+                            <span class="bigger-110">Bewerken</span>
+                        </a>
+
+                        <a href="/persons/delete?id={{person.id}}" class="btn btn-sm btn-block btn-danger">
+                            <i class="ace-icon glyphicon glyphicon-trash bigger-110"></i>
+                            <span class="bigger-110">Verwijderen</span>
+                        </a>
+                    </div><!-- /.col -->
+
+                    <div class="col-xs-12 col-sm-9">
+                        <h4 class="blue">
+                            <span class="middle">{{person.claims[18].value}} {{person.claims[32].value}}</span>
+                        </h4>
+
+                        <div class="profile-user-info">
+                            {% for claim in person.claims %}
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> {{claim.name}}</div>
+
+                                <div class="profile-info-value">
+                                    {% if claim.type == 'radio' %}
+                                    <span>{{claim.claim_value[claim.value]}}</span>
+                                    {% else %}
+                                    <span>{{claim.value}}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <div class="space-20"></div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title smaller">
+                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                    Bijzonderheden
+                                </h4>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <ul>
+                                       <li class="red">Mag absoluut geen paracetamol! Zie rapport <a href="#">04-07-2016</a></li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small header-color-blue2">
+                                <h4 class="widget-title smaller">
+                                    <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                    Openstaande doelen
+                                </h4>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-16">
+                                    <div class="clearfix">
+                                        <div class="grid3 center">
+                                            <div class="easy-pie-chart percentage" data-percent="45" data-color="#CA5952" style="height: 72px; width: 72px; line-height: 71px; color: rgb(202, 89, 82);">
+                                                <span class="percent">45</span>%
+                                                <canvas height="72" width="72"></canvas></div>
+
+                                            <div class="space-2"></div>
+                                            Leren fietsen
+                                        </div>
+
+                                        <div class="grid3 center">
+                                            <div class="center easy-pie-chart percentage" data-percent="90" data-color="#59A84B" style="height: 72px; width: 72px; line-height: 71px; color: rgb(89, 168, 75);">
+                                                <span class="percent">90</span>%
+                                                <canvas height="72" width="72"></canvas></div>
+
+                                            <div class="space-2"></div>
+                                            Communicatie met begeleiding
+                                        </div>
+
+                                        <div class="grid3 center">
+                                            <div class="center easy-pie-chart percentage" data-percent="80" data-color="#9585BF" style="height: 72px; width: 72px; line-height: 71px; color: rgb(149, 133, 191);">
+                                                <span class="percent">80</span>%
+                                                <canvas height="72" width="72"></canvas></div>
+
+                                            <div class="space-2"></div>
+                                            Been wondje helen
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /#home -->
+
+            <div id="files" class="tab-pane">
+                <div class="profile-feed row">
+                    <div id="elfinder"></div>
+                </div><!-- /.row -->
+            </div><!-- /#feed -->
+
+            <div id="friends" class="tab-pane">
+                <div class="profile-users clearfix">
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar4.png" alt="Bob Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Bob Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Content Editor</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 20 mins ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar1.png" alt="Rose Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Rose Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Graphic Designer</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 30 min ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar.png" alt="Jim Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-busy"></span>
+                                        Jim Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">SEO &amp; Advertising</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 red"></i>
+                                        <span class="grey"> 1 hour ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar5.png" alt="Alex Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-idle"></span>
+                                        Alex Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Marketing</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class=""> 40 minutes idle </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar2.png" alt="Phil Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Phil Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Public Relations</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 2 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar3.png" alt="Susan Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-online"></span>
+                                        Susan Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">HR Management</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                        <span class="green"> 20 mins ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar1.png" alt="Jennifer Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Jennifer Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Graphic Designer</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 2 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemdiv memberdiv">
+                        <div class="inline pos-rel">
+                            <div class="user">
+                                <a href="#">
+                                    <img src="dist/avatars/avatar3.png" alt="Alexa Doe's avatar">
+                                </a>
+                            </div>
+
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">
+                                        <span class="user-status status-offline"></span>
+                                        Alexa Doe
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popover">
+                                <div class="arrow"></div>
+
+                                <div class="popover-content">
+                                    <div class="bolder">Accounting</div>
+
+                                    <div class="time">
+                                        <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                        <span class="grey"> 4 hours ago </span>
+                                    </div>
+
+                                    <div class="hr dotted hr-8"></div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr10 hr-double"></div>
+
+                <ul class="pager pull-right">
+                    <li class="previous disabled">
+                        <a href="#">â† Prev</a>
+                    </li>
+
+                    <li class="next">
+                        <a href="#">Next â†’</a>
+                    </li>
+                </ul>
+            </div><!-- /#friends -->
+
+            <div id="pictures" class="tab-pane">
+                <ul class="ace-thumbnails">
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-1.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-2.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-3.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-4.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-5.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-6.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-1.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" data-rel="colorbox">
+                            <img alt="150x150" src="dist/images/gallery/thumb-2.jpg">
+                            <div class="text">
+                                <div class="inner">Sample Caption on Hover</div>
+                            </div>
+                        </a>
+
+                        <div class="tools tools-bottom">
+                            <a href="#">
+                                <i class="ace-icon fa fa-link"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-paperclip"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-times red"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /#pictures -->
+        </div>
+    </div>
+</div>
+{% endblock %}

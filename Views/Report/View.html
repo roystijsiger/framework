@@ -1,0 +1,17 @@
+{% extends template %}
+{% block pagename %}Rapportage bekijken{% endblock %}
+{% block pagedescription %}Voornaam Achternaam{% endblock %}
+{% block content %}
+    {% set report = data.report %}
+    <h3>Rapportage</h3>
+    {{report.report|raw}}<br />
+    <h3>Domein</h3>
+    {{report.domain}}<br />
+    <h3>Doel</h3>
+    {{report.target}}<br />
+    {%if report.attachment is not null %}
+        <h3>Bijlage</h3>
+        <a href="http://dev.ozadmin.nl{{report.attachment}}" target="_blank">Download bestand</a><br />
+    {%endif%}
+{% endblock %}
+    

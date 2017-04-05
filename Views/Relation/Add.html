@@ -1,0 +1,54 @@
+{% extends template %}
+{% block pagename %}Nieuwe overeenkomst{% endblock %}
+{% block pagedescription %}{% endblock %}
+{% block additionalHead %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+
+<form class="step-content pos-rel steps-container" action="/relations/add" method="post" enctype="multipart/form-data">
+    <div class="form-horizontal" id="sample-form">
+
+        <h4>Medewerker</h4>
+        <select name="person_1">
+            {% for employee in data.employees %}
+            <option value="{{employee.id}}">{{ employee.claims[19].value}} {{ employee.claims[32].value }}</option>
+            {% endfor %}
+        </select>
+
+
+        <h4>Cli&euml;nt</h4>
+        <select name="person_2">
+            {% for client in data.clients %}
+            <option value="{{client.id}}">{{ client.claims[19].value}} {{ client.claims[32].value }}</option>
+            {% endfor %}
+        </select>
+
+        <h4>Tarief</h4>
+        <input type="text" id="rate_per_hour" name="rate_per_hour" required/>
+
+        <h4>Kilometertarief</h4>
+
+        <input type="text" id="rate_per_kilometer" name="rate_per_kilometer" required/>
+
+        <h4>Periode</h4>
+
+        <input type="date" id="begin_date" name="begin_date" required/>
+-
+        <input type="date" id="end_date" name="end_date" required/>
+
+        <h4>Beschikking</h4>
+        <select name="disposal" required>
+            <option value="Pgb">Pgb</option>
+            <option value="Wmo">Wmo</option>
+            <option value="Jeugdwet">Jeugdwet</option>
+        </select>
+        <hr>
+        <input type="submit" class="btn btn-primary pull-right" value="Opslaan">
+    </div>
+</form>
+{% endblock %}

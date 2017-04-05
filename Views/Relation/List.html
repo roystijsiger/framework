@@ -1,0 +1,41 @@
+{% extends template %}
+
+{% block pagename %}Overeenkomsten{% endblock %}
+{% block pagedescription %}Paginabeschrijving{% endblock %}
+{% block additionalHead %}{% endblock %}
+
+{% block content %}
+<table class="table table-bordered bootstrap-datatable datatable responsive">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Medewerker</th>
+            <th>Client</th>
+            <th>Tarief per uur</th>
+            <th>Kilometertarief</th>
+            <th>Begin datum</th>
+            <th>Eind datum</th>
+            <th>Beschikking</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for relation in data.relations %}
+            <tr>
+                <td>{{relation.id}}</td>
+                <td>
+                    {{relation.person_name.18.value}} {{relation.person_name.32.value}}
+                </td>
+                <td>
+                    {{relation.person2_name.18.value}} {{relation.person2_name.32.value}}
+                </td>
+                <td>{{relation.rate_per_hour}}</td>
+                <td>{{relation.rate_per_kilometer}}</td>
+                <td>{{relation.begin_date}}</td>
+                <td>{{relation.end_date}}</td>
+                <td>{{relation.disposal}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

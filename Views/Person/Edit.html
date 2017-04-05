@@ -1,0 +1,46 @@
+{% extends template %}
+
+{% block pagename %}Paginanaam{% endblock %}
+{% block pagedescription %}Paginabeschrijving{% endblock %}
+{% block additionalHead %}{% endblock %}
+
+{% block content %}
+<form method="post">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            {% for claim in data.claims %}
+            <div class="form-group ">
+                <label class="control-label " for="claim-{{ claim.id }}">
+                    {{ claim.name }}
+                    {% if claim.required %}<span class="red">*</span>{% endif %}
+                </label>              
+                {% if claim.type == "radio" %}
+                <br>
+                    {% for key,option in claim.value %}
+                        <label>
+                            <input 
+                                name="claims[{{ claim.id }}]" 
+                                type="{{ claim.type }}" 
+                                value="{{ key }}" 
+                                {% if claim.required %}required{% endif %} 
+                                {% if data.person.claims[claim.id].value == key %}checked{% endif %}  /> 
+                            
+                            {{option}}
+                        </label><br>
+                    {% endfor %}
+                {% else %}
+                    <input class="form-control" id="claim-{{ claim.id }}" name="claims[{{ claim.id }}]" type="{{ claim.type }}" value="{{data.person.claims[claim.id].value}}" {% if claim.required %}required{% endif %}/>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <div>
+                    <button class="btn btn-primary" type="submit">
+                        Opslaan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

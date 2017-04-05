@@ -1,0 +1,236 @@
+[
+    {
+        "name": "twig/twig",
+        "version": "v1.24.0",
+        "version_normalized": "1.24.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+            "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.7"
+        },
+        "require-dev": {
+            "symfony/debug": "~2.7",
+            "symfony/phpunit-bridge": "~2.7"
+        },
+        "time": "2016-01-25 21:22:18",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.24-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            },
+            {
+                "name": "Twig Team",
+                "homepage": "http://twig.sensiolabs.org/contributors",
+                "role": "Contributors"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "usmanhalalit/viocon",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/usmanhalalit/viocon.git",
+            "reference": "0878afee16f15355971fb95bf3c6d297aceff35d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/usmanhalalit/viocon/zipball/0878afee16f15355971fb95bf3c6d297aceff35d",
+            "reference": "0878afee16f15355971fb95bf3c6d297aceff35d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2013-07-13 19:54:56",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Viocon": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Muhammad Usman",
+                "email": "hi@usman.it",
+                "role": "Developer"
+            }
+        ],
+        "description": "A simple and flexible Dependency Injection container for PHP.",
+        "homepage": "https://github.com/usmanhalalit/viocon",
+        "keywords": [
+            "container",
+            "di",
+            "ioc",
+            "test"
+        ]
+    },
+    {
+        "name": "phpmailer/phpmailer",
+        "version": "v5.2.14",
+        "version_normalized": "5.2.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "e774bc9152de85547336e22b8926189e582ece95"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/e774bc9152de85547336e22b8926189e582ece95",
+            "reference": "e774bc9152de85547336e22b8926189e582ece95",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "require-dev": {
+            "phpdocumentor/phpdocumentor": "*",
+            "phpunit/phpunit": "4.7.*"
+        },
+        "suggest": {
+            "league/oauth2-client": "Needed for XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Gmail XOAUTH2"
+        },
+        "time": "2015-11-01 10:15:28",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "class.phpmailer.php",
+                "class.phpmaileroauth.php",
+                "class.phpmaileroauthgoogle.php",
+                "class.smtp.php",
+                "class.pop3.php",
+                "extras/EasyPeasyICS.php",
+                "extras/ntlm_sasl_client.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "usmanhalalit/pixie",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/usmanhalalit/pixie.git",
+            "reference": "7df25f46bca44722a2d46a73cb07675751978a91"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/usmanhalalit/pixie/zipball/7df25f46bca44722a2d46a73cb07675751978a91",
+            "reference": "7df25f46bca44722a2d46a73cb07675751978a91",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "usmanhalalit/viocon": "1.0.*@dev"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.4",
+            "phpunit/phpunit": "^4.8",
+            "squizlabs/php_codesniffer": "^2.5"
+        },
+        "time": "2015-12-28 08:57:28",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Pixie": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Muhammad Usman",
+                "email": "hi@usman.it",
+                "role": "Developer"
+            },
+            {
+                "name": "Pavel Puchkin",
+                "email": "i@neoascetic.me",
+                "role": "Developer"
+            }
+        ],
+        "description": "A lightweight, expressive, framework agnostic query builder for PHP.",
+        "homepage": "https://github.com/usmanhalalit/pixie",
+        "keywords": [
+            "database",
+            "mysql",
+            "postgresql",
+            "query builder",
+            "sql",
+            "sqlite"
+        ]
+    }
+]

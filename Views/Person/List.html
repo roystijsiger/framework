@@ -1,0 +1,101 @@
+{% block pagename %}Personen{% endblock %}
+{% block pagedescription %}Overzicht van de betreffende personen{% endblock %}
+
+{% extends template %}
+{% block additionalHead %}
+<script src="/Views/Templates/Ace/js/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    });
+</script>
+{% endblock %}
+{% block content %}
+{% if data.edit_permissions %}
+    {% for group in data.groups %}
+        <a class="btn btn-primary" href="/persons/add?group={{ group.id }}">Nieuwe <i>{{ group.name }}</i></a>
+    {% endfor %}
+
+    <div class="hr dotted"></div>
+{% endif%}
+<table class="table table-bordered bootstrap-datatable datatable responsive">
+    <thead>
+        <tr>
+            {% for claim in data.claims %}
+                <th>{{claim.name}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for person in data.persons %} 
+        
+        
+        <tr class="{% if not person.active %}active text-muted{% endif %}">
+            {% for claim in person.claims %} 
+            <td>{{claim.value}}</td>
+            {% endfor %}
+            <td width="30%">
+                {% if person.is_view_allowed %}
+                <a class="btn-sm btn-success" href="/persons/view?id={{person.id}}">
+                    <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                    Bekijk
+                </a>
+                {% endif %}
+                {% if person.is_edit_allowed %}
+                    &nbsp;
+                    <a class="btn-sm btn-info" href="/persons/edit?id={{person.id}}">
+                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                        Bewerken
+                    </a>&nbsp;
+                    {% if person.active %}
+                        <a class="btn-sm btn-warning" href="/persons/deactivate?id={{person.id}}">
+                            <i class="fa fa-minus-square-o icon-white"></i>
+                            Deactiveer
+                        </a>
+                    {% else %}
+                        <a class="btn-sm btn-warning" href="/persons/activate?id={{person.id}}">
+                            <i class="fa fa-check-square-o icon-white"></i>
+                            Activeer
+                        </a>
+                    {% endif %}
+                    &nbsp;
+
+                     {% if person.is_delete_allowed %}
+                    <a class="btn-sm btn-danger" href="#" data-href="/persons/delete?id={{person.id}}" data-toggle="modal" data-target="#confirm-delete">
+                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                        Verwijderen
+                    </a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Verwijderen bevestigen</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Let op! Het verwijderen van een cli&euml;nt kan niet meer door u ongedaan gemaakt worden.</p>
+                <p>Weet je zeker dat je door wil gaan?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                <a class="btn btn-danger btn-ok">Verwijderen</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

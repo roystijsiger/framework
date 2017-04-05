@@ -1,0 +1,10 @@
+{% extends template %}
+{% block content %}
+
+<div class="alert alert-block alert-danger">
+    <i class="ace-icon fa  fa-exclamation-triangle red"></i>
+    Er is een serverfout opgetreden!<hr>
+    <strong>Technische foutmelding</strong>
+    <pre>{{data.error}}</pre>
+</div>
+{% endblock %}

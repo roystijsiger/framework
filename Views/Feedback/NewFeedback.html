@@ -1,0 +1,79 @@
+{% extends template %}
+
+{% block pagename %}Feedback{% endblock %}
+{% block pagedescription %}Meld een fout of suggereer een nieuwe functie{% endblock %}
+{% block additionalHead %}{% endblock %}
+
+{% block content %}
+<p><strong>Wij waarderen feedback enorm! Probeer het onderstaande formulier zo gedetailleerd mogelijk in te vullen.</strong></p>
+<form method="post" action="/feedback" class="feedback" >
+    <fieldset>
+        <label>Uw naam</label><br> 
+        <input name="name" type="text" placeholder="Naam" class="ace" required="">
+        <br>
+        <br>
+        <label>Vul een email adres in waarmee wij contact met u op kunnen nemen.</label><br> 
+        <input id="email" name="email" type="text" placeholder="Email" class="ace" required="" value="{{data.User.email}}">
+        <br> 
+        <br>
+        <label for="type">Soort melding</label>
+        <div id="type">
+            <label for="type-0" class="radio-label">
+                <input type="radio" name="type" id="type-0" value="1" onclick="reportBug()" checked="checked">
+                Fout
+            </label><br>
+            <label for="type-1" class="radio-label">
+                <input type="radio" name="type" id="type-1" value="2" onclick="reportFeature()">
+                Nieuwe functie
+            </label><br>
+            <label for="type-2" class="radio-label">
+                <input type="radio" name="type" id="type-2" value="3" onclick="reportComment()">
+                Opmerkingen
+            </label><br>
+        </div>
+    </fieldset>
+    <fieldset id="bug">
+        <label for="whatdone">Wat deed u voordat het probleem optrad?</label>
+        <textarea class="ace" id="whatdone" name="whatdone"></textarea>
+        <label for="expected">Wat had u verwacht wat er zou gebeuren?</label>
+        <textarea class="ace" id="expected" name="expected"></textarea>
+        <label for="whathappened">Wat gebeurde er?</label>
+        <textarea class="ace" id="whathappened" name="whathappened"></textarea>
+        <label for="reproduce">Wat moeten we doen om het probleem opnieuw voor te laten doen?</label>
+        <textarea class="ace" id="reproduce" name="reproduce"></textarea>
+    </fieldset>
+    <fieldset id="feature">
+        <label for="feature">Omschrijving van gewenste nieuwe functie</label>
+        <textarea class="ace" id="feature" name="feature"></textarea>
+    </fieldset>
+    <fieldset>
+        <label for="comments">Opmerkingen</label><br>
+        <textarea class="ace" id="comments" name="comments" rows="10"></textarea>
+    </fieldset>
+    
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+<script>
+    var bugEl = document.getElementById('bug');
+    var featureEl = document.getElementById('feature');
+    
+    featureEl.style.display = "none";
+    
+    function reportBug(){
+        featureEl.style.display = "none";
+        bugEl.style.display = "block";
+    }
+    
+    function reportFeature(){
+        featureEl.style.display = "block";
+        bugEl.style.display = "none";       
+    }   
+    
+    function reportComment(){
+        featureEl.style.display = "none";
+        bugEl.style.display = "none"; 
+    }
+</script>
+
+{% endblock %}

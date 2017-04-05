@@ -1,0 +1,65 @@
+{% extends template %}
+
+{% block pagename %}Menu{% endblock %}
+{% block pagedescription %}Aanpassingen in het menu aanbrengen{% endblock %}
+{% block additionalHead %}
+
+{% endblock %}
+
+{% block content %}
+<a class="btn btn-primary" href="/menu/additem">Menu item toevoegen</a><br>
+<table class="table table-striped table-bordered sorted_table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Naam</th>
+            <th>Beschrijving</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for menuItem in data.Menu %}  
+            <tr class="{{menuItem.hidden == 1 ? 'light-grey' : ''}}">
+                <td><i class="fa {{menuItem.icon}}"></i></td>
+                <td>{{menuItem.name}}</td>
+                <td>{{menuItem.description|raw}}</td>
+                <td width="30%">
+                    <a class="btn btn-sm btn-success" href="{{menuItem.route}}">
+                            <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                            Ga naar
+                    </a>
+                    <a class="btn btn-sm btn-info" href="/menu/edit?id={{menuItem.id}}">
+                            <i class="glyphicon glyphicon-edit icon-white"></i>
+                            Bewerken
+                    </a>
+                    <a class="btn btn-sm btn-danger" href="#">
+                            <i class="glyphicon glyphicon-trash icon-white"></i>
+                            Verwijderen
+                    </a>
+                </td>
+            </tr>
+            {% for childitem in menuItem.children %}
+            <tr class="{{childitem.hidden == 1 ? 'light-grey' : ''}}">
+                <td style="padding-left: 40px;width: 70px;"><i class="fa {{childitem.icon}}"></i></td>
+                <td>{{childitem.name}}</td>
+                <td>{{childitem.description|raw}}</td>
+                <td width="30%">
+                    <a class="btn btn-sm btn-success" href="{{childitem.route}}">
+                            <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                            Ga naar
+                    </a>
+                    <a class="btn btn-sm btn-info" href="/menu/edit?id={{childitem.id}}">
+                            <i class="glyphicon glyphicon-edit icon-white"></i>
+                            Bewerken
+                    </a>
+                    <a class="btn btn-sm btn-danger" href="#">
+                            <i class="glyphicon glyphicon-trash icon-white"></i>
+                            Verwijderen
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

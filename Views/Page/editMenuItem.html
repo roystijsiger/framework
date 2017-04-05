@@ -1,0 +1,95 @@
+{% extends template %}
+
+{% block pagename %}Paginanaam{% endblock %}
+{% block pagedescription %}Paginabeschrijving{% endblock %}
+{% block additionalHead %}
+<style>
+input {
+    min-width: 404px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% set menuItem = data.menuItem %}
+<form method="post" action="/menu/edit" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="name">Id</label>
+        <div class="col-sm-9">
+            <input type="text" id="id" name="id" class="col-xs-1 col-sm-1" value="{{menuItem.id}}" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="name">Naam</label>
+        <div class="col-sm-9">
+            <input type="text" id="name" name="name" placeholder="Dashboard" class="col-xs-1 col-sm-1" required value="{{menuItem.name}}">
+        </div>
+    </div>
+    <div class="space-4"></div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="description">Beschrijving</label>
+        <div class="col-sm-9">
+            <input type="text" id="description" name="description" placeholder="Overzicht van alle gebeurtenissen" class="col-xs-1 col-sm-1" value="{{menuItem.description}}">
+        </div>
+    </div>
+    <div class="space-4"></div>
+    
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="route">Route</label>
+        <div class="col-sm-9">
+            <input type="text" id="route" name="route" placeholder="dashboard" class="col-xs-1 col-sm-1" value="{{menuItem.route}}">
+        </div>
+    </div>
+    <div class="space-4"></div>
+    
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="icon">Font Awesome icoon</label>
+        <div class="col-sm-9">
+            <input type="text" id="icon" name="icon" placeholder="fa-folder" class="col-xs-1 col-sm-1" value="{{menuItem.icon}}">
+        </div>
+    </div>
+    <div class="space-4"></div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="hidden">Verborgen</label>
+        <div class="col-sm-9">
+            <input type="checkbox" id="hidden" name="hidden" class="col-xs-1 col-sm-1" value="1" {{menuItem.hidden == 1 ? "checked" : ""}}>
+        </div>
+    </div>
+    <div class="space-4"></div>
+    
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="order">Volgorde</label>
+        <div class="col-sm-9">
+            <input type="text" id="order" name="order" class="col-xs-1 col-sm-1" value="{{menuItem.order}}">
+        </div>
+    </div>
+    <div class="space-4"></div>
+    
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="parent">Bovenliggende item</label>
+        <div class="col-sm-9">
+            <input type="text" id="parent" name="parent" class="col-xs-1 col-sm-1" value="{{menuItem.parent}}" >
+        </div>
+    </div>
+    <div class="space-4"></div>
+
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="submit">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                Opslaan
+            </button>
+
+            &nbsp; &nbsp; &nbsp;
+            <a class="btn" href="/clients">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                Annuleren
+            </a>
+        </div>
+    </div>
+</form> 
+{% endblock %}

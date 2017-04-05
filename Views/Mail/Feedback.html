@@ -1,0 +1,46 @@
+{% extends template %}
+
+{% block pagename %}Feedback{% endblock %}
+{% block pagedescription %}Feedback van {{data.name}} &lt;{{data.email}}&gt;{% endblock %}
+{% block additionalHead %}{% endblock %}
+
+{% block content %}
+    <p>
+        <strong>Type feedback:</strong><br>
+    {% if data.type == 1 %}
+            Bug
+        </p>
+        <p>
+            <strong>Wat het persoon deed:</strong><br>
+            {{data.whatdone}}
+        </p>
+        <p>
+            <strong>Wat het persoon verwachte:</strong><br>
+            {{data.expected}}
+        </p>
+        <p>
+            <strong>Wat er gebeurde:</strong><br>
+            {{data.whathappened}}
+        </p>
+        <p>
+            <strong>Wat er gedaan kan worden om het probleem nogmaals voor te laten doen:</strong><br>
+            {{data.reproduce}}
+        </p>
+    {% elseif data.type == 2 %}
+            Feature
+        </p>
+        <p>
+            <strong>Gesuggereerde functie:</strong><br>
+            {{data.feature}}
+        </p>
+    {% elseif data.type == 3 %}
+            Opmerking
+        </p>
+    {% endif %}
+
+    <p>
+        <strong>Opmerkingen:</strong><br>
+        {{data.comments|default('Geen opmerkingen') }}
+    </p>
+
+{% endblock %}

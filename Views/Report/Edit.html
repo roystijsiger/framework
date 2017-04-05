@@ -1,0 +1,84 @@
+{% extends template %}
+{% block pagename %}Bewerk raportage{% endblock %}
+{% block pagedescription %}{% endblock %}
+{% block additionalHead %} 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/Libraries/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    $(function () {
+        CKEDITOR.replace('report', {language: 'nl'});
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<form class="step-content pos-rel steps-container" action="/reports/edit" method="post" enctype="multipart/form-data">
+    <input type="text" name="id" value="{{data.report.id}}" hidden/>
+    <div class="form-horizontal" id="sample-form">
+        <div class="row">
+            <div class="col-sm-12">
+                <textarea id="report" name="report">{{data.report.report}}</textarea>
+            </div>
+        </div>
+        <br>
+        
+        <div class="form-group"> 
+            <label class="col-sm-3 control-label no-padding-right" for="domain">Domein</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <select name="domain" id="domain">
+                        {% for domain in data.ReportDomains %}
+                            {% if domain.id == data.report.domain %}
+                                 <option value="{{domain.id}}" selected>{{domain.name}}</option>
+                            {% else %}
+                                <option value="{{domain.id}}">{{domain.name}}</option>
+                            {% endif %}
+                          
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="target">Datum</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="date" name="report_date" value="{{data.report.report_date}}" style="width: 223px;"/>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="target">Doel</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" name="target" style="width: 223px;" value="{{data.report.target}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">Bijlage</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    {% if date.report.attachment is not null %}
+                    Current attachment: <br />
+                    {{data.report.attachment}} <a href="/attachment/delete?id={{data.report.id}}">Bijlage verwijderen</a><br />
+                    {% endif %}
+                    Upload a new attachment:<br />
+                    <input id="attachment" name="attachment" type="file"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <input type="submit" class="btn btn-primary pull-right" value="Opslaan">
+
+</form>
+{% endblock %}

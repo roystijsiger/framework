@@ -1,0 +1,73 @@
+{% extends template %}
+{% block pagename %}Nieuwe raportage{% endblock %}
+{% block pagedescription %}{% endblock %}
+{% block additionalHead %} 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/Libraries/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    $(function () {
+        CKEDITOR.replace('report', {language: 'nl'});
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<form class="step-content pos-rel steps-container" action="/reports/add" method="post" enctype="multipart/form-data">
+    <div class="form-horizontal" id="sample-form">
+        <div class="row">
+            <div class="col-sm-12">
+                <textarea id="report" name="report"></textarea>
+            </div>
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="domain">Domein</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <select name="domain" id="domain">
+                        {% for domain in data.ReportDomains %}
+                        <option value="{{domain.id}}">{{domain.name}}</option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="target">Datum</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="date" name="report_date" style="width: 223px;"/>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="target">Doel</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" name="target" style="width: 223px;"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">Bijlage</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input id="attachment" name="attachment" type="file">
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <input type="submit" class="btn btn-primary pull-right" value="Opslaan">
+
+</form>
+{% endblock %}
