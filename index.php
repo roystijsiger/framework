@@ -1,11 +1,5 @@
 <?php
-/**
- * OZ Admin 
- * (c) 2016 Zycon
- * 
- * @author Varbit
- * 
- */
+
 
 // General settings
 define('HOSTNAME', '');
