@@ -23,12 +23,12 @@ define('MAIL_SUPPORT', 'support@ozadmin.nl');
 
 define('MAIL_SMTP_SERVER', 'mail.' . HOSTNAME);
 define('MAIL_SMTP_USERNAME', MAIL_FROM);
-define('MAIL_SMTP_PASSWORD', 'iP9MFq1P3a');
+define('MAIL_SMTP_PASSWORD', '');
 
 // Database settings
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'zorgadmin_dev');
 define('DB_USER', 'zorgadmin_oza');
-define('DB_PASS', 'igNaveRCedIf');
+define('DB_PASS', '');
 
 require_once 'Initialize.php';
