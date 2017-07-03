@@ -1,6 +1,4 @@
 <?php
-
-
 // General settings
 define('HOSTNAME', '');
 define('ROOT_DIR', __DIR__ . '/');
